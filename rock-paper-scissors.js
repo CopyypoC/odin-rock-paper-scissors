@@ -9,6 +9,7 @@ function getComputerChoice() {
         case 2: return 'scissors';
     }
 }
+
 // Get player choice
 function getPlayerChoice() {
     let playerChoice = prompt('Rock, paper, or scissors?');
@@ -18,12 +19,14 @@ function getPlayerChoice() {
 // Make play round function
 function playRound(playerSelection, computerSelection) {
     // Compare computer and player choice to decide winner
+    // Show tie if selections are the same
     if (playerSelection === computerSelection) {
         return (`You tied! Both played ${playerSelection}`);
     }
+    // Check for differing selections and determine the outcome
     // Show rock outcomes
     if (playerSelection === 'rock') {
-        switch (playerSelection) {
+        switch (playerSelection !== computerSelection) {
             case (computerSelection === 'paper'):
                 return 'You lose! Rock doesn\'t beat paper';
             case (computerSelection === 'scissors'):
@@ -31,7 +34,7 @@ function playRound(playerSelection, computerSelection) {
         }
     // Show paper outcomes
     } else if (playerSelection === 'paper') {
-        switch (playerSelection) {
+        switch (playerSelection !== computerSelection) {
             case (computerSelection === 'scissors'):
                 return 'You lose! Paper doesn\'t beat rock';
             case (computerSelection === 'rock'):
@@ -39,15 +42,28 @@ function playRound(playerSelection, computerSelection) {
         }
     // Show scissors outcomes
     } else if (playerSelection === 'scissors') {
-        switch (playerSelection) {
+        switch (playerSelection !== computerSelection) {
             case (computerSelection === 'rock'):
                 return 'You lose! Scissors doesn\'t beat rock';
             case (computerSelection === 'paper'):
                 return 'You win! Scissors beats paper';           
         }
     }
+    return;
 }
 
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
-// Play game of 5 rounds
-    // Call play round function 5 times
+// // Play game of 5 rounds
+// function playGame() {
+//     // Set scores for both player and computer
+//     let playerScore = 0;
+//     let computerScore = 0;
+//     // Set outcome message
+//     let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+//     // Show outcome message
+//     console.log(outcomeMessage);
+//     // Change scores after the round
+//     (outcomeMessage.includes('win')) ? playerScore++ : computerScore ++;
+//     // Display final result message
+//     (playerScore > computerScore) ? console.log(`You win ${playerScore} to ${computerScore}!`) : console.log(`You lose ${playerScore} to ${computerScore}!`);
+// }
+// playGame();
