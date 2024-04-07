@@ -10,7 +10,17 @@ function getComputerChoice() {
     }
 }
 // Get player choice
-// Make both choices same case for comparison
-// Compare computer and player choice to decide winner
-// Increase score for winner
-// Display winner and score after 5 rounds
+function getPlayerChoice() {
+    let playerChoice = prompt('Rock, paper, or scissors?');
+    // Make player choice lowercase for easy comparison
+    return playerChoice.toLowerCase();
+}
+// Make play round function
+    // Set computer choice
+    // Set player choice
+    // Set score
+    // Compare computer and player choice to decide winner
+    // Increase score for winner
+// Play game of 5 rounds
+    // Call play round function 5 times
+    // Display winner and score after 5 rounds
