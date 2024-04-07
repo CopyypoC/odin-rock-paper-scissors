@@ -16,11 +16,38 @@ function getPlayerChoice() {
     return playerChoice.toLowerCase();
 }
 // Make play round function
-    // Set computer choice
-    // Set player choice
-    // Set score
+function playRound(playerSelection, computerSelection) {
     // Compare computer and player choice to decide winner
-    // Increase score for winner
+    if (playerSelection === computerSelection) {
+        return (`You tied! Both played ${playerSelection}`);
+    }
+    // Show rock outcomes
+    if (playerSelection === 'rock') {
+        switch (playerSelection) {
+            case (computerSelection === 'paper'):
+                return 'You lose! Rock doesn\'t beat paper';
+            case (computerSelection === 'scissors'):
+                return 'You win! Rock beats scissors';           
+        }
+    // Show paper outcomes
+    } else if (playerSelection === 'paper') {
+        switch (playerSelection) {
+            case (computerSelection === 'scissors'):
+                return 'You lose! Paper doesn\'t beat rock';
+            case (computerSelection === 'rock'):
+                return 'You win! Paper beats scissors';           
+        }
+    // Show scissors outcomes
+    } else if (playerSelection === 'scissors') {
+        switch (playerSelection) {
+            case (computerSelection === 'rock'):
+                return 'You lose! Scissors doesn\'t beat rock';
+            case (computerSelection === 'paper'):
+                return 'You win! Scissors beats paper';           
+        }
+    }
+}
+
+console.log(playRound(getPlayerChoice(), getComputerChoice()));
 // Play game of 5 rounds
     // Call play round function 5 times
-    // Display winner and score after 5 rounds
