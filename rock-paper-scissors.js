@@ -1,4 +1,5 @@
 // 5 round rock, paper, scissors game against a computer
+
 // Get random computer choice
 function getComputerChoice() {
     // Scale random number to 3 options  
@@ -54,56 +55,57 @@ function playRound(playerSelection, computerSelection) {
 
 // Play game of 5 rounds
 function playGame() {
+    // Set outcome message and play first round
+    let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     // Set scores for both player and computer
     let playerScore = 0;
     let computerScore = 0;
-    // Set outcome message and play first round
-    let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     // Show outcome message
     console.log(outcomeMessage);
-
-    // Calculate the score from the round outcome
-    if (outcomeMessage.includes('win')) {
-        playerScore++;
-    } else if (outcomeMessage.includes('lose')) {
-        computerScore++;
-    }
+    // Update score after each round
+    playerScore = calcWin(outcomeMessage, playerScore);
+    computerScore = calcLose(outcomeMessage, computerScore);
 
     // Play the rest of the 4 rounds
     outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     console.log(outcomeMessage);
-    if (outcomeMessage.includes('win')) {
-        playerScore++;
-    } else if (outcomeMessage.includes('lose')) {
-        computerScore++;
-    }
+    playerScore = calcWin(outcomeMessage, playerScore);
+    computerScore = calcLose(outcomeMessage, computerScore);
     
     outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     console.log(outcomeMessage);
-    if (outcomeMessage.includes('win')) {
-        playerScore++;
-    } else if (outcomeMessage.includes('lose')) {
-        computerScore++;
-    }
+    playerScore = calcWin(outcomeMessage, playerScore);
+    computerScore = calcLose(outcomeMessage, computerScore);
 
     outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     console.log(outcomeMessage);
-    if (outcomeMessage.includes('win')) {
-        playerScore++;
-    } else if (outcomeMessage.includes('lose')) {
-        computerScore++;
-    }
+    playerScore = calcWin(outcomeMessage, playerScore);
+    computerScore = calcLose(outcomeMessage, computerScore);
 
     outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
     console.log(outcomeMessage);
-    if (outcomeMessage.includes('win')) {
-        playerScore++;
-    } else if (outcomeMessage.includes('lose')) {
-        computerScore++;
-    }
+    playerScore = calcWin(outcomeMessage, playerScore);
+    computerScore = calcLose(outcomeMessage, computerScore);
 
     // Display final result message
     createFinalResult(playerScore, computerScore);
+}
+
+// Increase player score on win
+function calcWin(outcomeMessage, playerScore) {
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+        return playerScore;
+    }
+    return playerScore;
+}
+// Increase computer score on lose
+function calcLose(outcomeMessage, computerScore) {
+    if (outcomeMessage.includes('lose')) {
+        computerScore++;
+        return computerScore;
+    }
+    return computerScore;
 }
 
 // Create final result message
