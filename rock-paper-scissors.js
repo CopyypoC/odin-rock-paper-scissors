@@ -36,12 +36,12 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === 'paper') {
         switch (playerSelection !== computerSelection) {
             case (computerSelection === 'scissors'):
-                return 'You lose! Paper doesn\'t beat rock';
+                return 'You lose! Paper doesn\'t beat scissors';
             case (computerSelection === 'rock'):
-                return 'You win! Paper beats scissors';           
+                return 'You win! Paper beats rock';           
         }
     // Show scissors outcomes
-    } else if (playerSelection === 'scissors') {
+    } else {
         switch (playerSelection !== computerSelection) {
             case (computerSelection === 'rock'):
                 return 'You lose! Scissors doesn\'t beat rock';
@@ -52,18 +52,69 @@ function playRound(playerSelection, computerSelection) {
     return;
 }
 
-// // Play game of 5 rounds
-// function playGame() {
-//     // Set scores for both player and computer
-//     let playerScore = 0;
-//     let computerScore = 0;
-//     // Set outcome message
-//     let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-//     // Show outcome message
-//     console.log(outcomeMessage);
-//     // Change scores after the round
-//     (outcomeMessage.includes('win')) ? playerScore++ : computerScore ++;
-//     // Display final result message
-//     (playerScore > computerScore) ? console.log(`You win ${playerScore} to ${computerScore}!`) : console.log(`You lose ${playerScore} to ${computerScore}!`);
-// }
-// playGame();
+// Play game of 5 rounds
+function playGame() {
+    // Set scores for both player and computer
+    let playerScore = 0;
+    let computerScore = 0;
+    // Set outcome message and play first round
+    let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+    // Show outcome message
+    console.log(outcomeMessage);
+
+    // Calculate the score from the round outcome
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+    } else if (outcomeMessage.includes('lose')) {
+        computerScore++;
+    }
+
+    // Play the rest of the 4 rounds
+    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+    console.log(outcomeMessage);
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+    } else if (outcomeMessage.includes('lose')) {
+        computerScore++;
+    }
+    
+    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+    console.log(outcomeMessage);
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+    } else if (outcomeMessage.includes('lose')) {
+        computerScore++;
+    }
+
+    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+    console.log(outcomeMessage);
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+    } else if (outcomeMessage.includes('lose')) {
+        computerScore++;
+    }
+
+    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
+    console.log(outcomeMessage);
+    if (outcomeMessage.includes('win')) {
+        playerScore++;
+    } else if (outcomeMessage.includes('lose')) {
+        computerScore++;
+    }
+
+    // Display final result message
+    createFinalResult(playerScore, computerScore);
+}
+
+// Create final result message
+function createFinalResult(playerScore, computerScore) {
+    if (playerScore > computerScore) {
+        console.log(`You win ${playerScore} to ${computerScore}!`)
+    } else if (playerScore === computerScore) {
+        console.log(`You tie ${playerScore} to ${computerScore}!`)
+    } else {
+        console.log(`You lose ${playerScore} to ${computerScore}!`)
+    }
+}
+
+playGame();
