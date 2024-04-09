@@ -11,45 +11,25 @@ function getComputerChoice() {
     }
 }
 
-// Get player choice
-function getPlayerChoice(choice) {
-    // Make player choice lowercase for easy comparison
-    return choice.toLowerCase();
+function capitalize(word) {
+    return word[0].toUpperCase() + word.slice(1);
 }
+
 // Make play round function
 function playRound(playerSelection, computerSelection) {
     // Compare computer and player choice to decide winner
-    // Show tie if selections are the same
+    // Tie outcome
     if (playerSelection === computerSelection) {
         return (`You tied! Both played ${playerSelection}`);
-    }
-    // Check for differing selections and determine the outcome
-    // Show rock outcomes
-    if (playerSelection === 'rock') {
-        switch (playerSelection !== computerSelection) {
-            case (computerSelection === 'paper'):
-                return 'You lose! Rock doesn\'t beat paper';
-            case (computerSelection === 'scissors'):
-                return 'You win! Rock beats scissors';           
-        }
-    // Show paper outcomes
-    } else if (playerSelection === 'paper') {
-        switch (playerSelection !== computerSelection) {
-            case (computerSelection === 'scissors'):
-                return 'You lose! Paper doesn\'t beat scissors';
-            case (computerSelection === 'rock'):
-                return 'You win! Paper beats rock';           
-        }
-    // Show scissors outcomes
+    // Winning outcomes
+    } else if ((playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')) {
+        return `You win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+    // Losing outcomes
     } else {
-        switch (playerSelection !== computerSelection) {
-            case (computerSelection === 'rock'):
-                return 'You lose! Scissors doesn\'t beat rock';
-            case (computerSelection === 'paper'):
-                return 'You win! Scissors beats paper';           
-        }
+        return `You lose! ${capitalize(playerSelection)} doesn't beat ${capitalize(computerSelection)}`;
     }
-    return;
 }
 
 // Increase player score on win
@@ -90,7 +70,7 @@ function playGame() {
     choiceButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             // Play a round with the button choice
-            outcomeMessage = playRound(getPlayerChoice(button.textContent), 
+            outcomeMessage = playRound(button.textContent.toLowerCase(),
             getComputerChoice());
             //Calculate score
             playerScore = calcWin(outcomeMessage, playerScore);
@@ -115,4 +95,3 @@ function playGame() {
 }
 
 playGame();
-// custom event on roundsplayed
