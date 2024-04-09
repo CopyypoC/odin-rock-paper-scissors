@@ -1,5 +1,4 @@
 // 5 round rock, paper, scissors game against a computer
-
 // Get random computer choice
 function getComputerChoice() {
     // Scale random number to 3 options  
@@ -12,10 +11,9 @@ function getComputerChoice() {
 }
 
 // Get player choice
-function getPlayerChoice() {
-    let playerChoice = prompt('Rock, paper, or scissors?');
+function getPlayerChoice(choice) {
     // Make player choice lowercase for easy comparison
-    return playerChoice.toLowerCase();
+    return choice.toLowerCase();
 }
 // Make play round function
 function playRound(playerSelection, computerSelection) {
@@ -81,3 +79,13 @@ function createFinalResult(playerScore, computerScore) {
     }
 }
 
+// Set all buttons into a list
+const choiceButtons = document.querySelectorAll('button');
+// For each button, add a click event listener
+choiceButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        // Play a round with the button choice
+        playRound(getPlayerChoice(button.textContent), getComputerChoice());
+    });
+});
+// Click event calls playRound with the correct choice
