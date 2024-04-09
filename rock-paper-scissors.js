@@ -1,4 +1,5 @@
 // 5 round rock, paper, scissors game against a computer
+let roundsPlayed = 0;
 // Get random computer choice
 function getComputerChoice() {
     // Scale random number to 3 options  
@@ -71,21 +72,47 @@ function calcLose(outcomeMessage, computerScore) {
 // Create final result message
 function createFinalResult(playerScore, computerScore) {
     if (playerScore > computerScore) {
-        console.log(`You win ${playerScore} to ${computerScore}!`)
-    } else if (playerScore === computerScore) {
-        console.log(`You tie ${playerScore} to ${computerScore}!`)
+        return (`Winner: ${playerScore} to ${computerScore}!`)
     } else {
-        console.log(`You lose ${playerScore} to ${computerScore}!`)
+        return (`Loser: ${playerScore} to ${computerScore}!`)
     }
 }
 
-// Set all buttons into a list
-const choiceButtons = document.querySelectorAll('button');
-// For each button, add a click event listener
-choiceButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        // Play a round with the button choice
-        playRound(getPlayerChoice(button.textContent), getComputerChoice());
+function playGame() {
+    let outcomeMessage = '';
+    let playerScore = 0;
+    let computerScore = 0;
+    let roundsPlayed = 0;
+    let results = document.querySelector('#results');
+    // Set all buttons into a list
+    const choiceButtons = document.querySelectorAll('button');
+    // For each button, add a click event listener
+    choiceButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            // Play a round with the button choice
+            outcomeMessage = playRound(getPlayerChoice(button.textContent), 
+            getComputerChoice());
+            //Calculate score
+            playerScore = calcWin(outcomeMessage, playerScore);
+            computerScore = calcLose(outcomeMessage, computerScore);
+            roundsPlayed++;
+
+            if (playerScore === 5 || computerScore === 5) {
+                results.textContent = 
+                `Round ${roundsPlayed} - 
+                FINISH! ${createFinalResult(playerScore, computerScore)}
+                ${outcomeMessage}`;
+                playerScore = 0;
+                computerScore = 0;
+                roundsPlayed = 0;               
+            } else {
+                // Update results with message and score
+                results.textContent = `Round ${roundsPlayed} - ${outcomeMessage}!
+                Player: ${playerScore} Computer: ${computerScore}`;
+            }
+        });
     });
-});
-// Click event calls playRound with the correct choice
+}
+
+playGame();
+// custom event on roundsplayed
