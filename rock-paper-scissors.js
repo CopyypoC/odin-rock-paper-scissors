@@ -53,44 +53,6 @@ function playRound(playerSelection, computerSelection) {
     return;
 }
 
-// Play game of 5 rounds
-function playGame() {
-    // Set outcome message and play first round
-    let outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-    // Set scores for both player and computer
-    let playerScore = 0;
-    let computerScore = 0;
-    // Show outcome message
-    console.log(outcomeMessage);
-    // Update score after each round
-    playerScore = calcWin(outcomeMessage, playerScore);
-    computerScore = calcLose(outcomeMessage, computerScore);
-
-    // Play the rest of the 4 rounds
-    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-    console.log(outcomeMessage);
-    playerScore = calcWin(outcomeMessage, playerScore);
-    computerScore = calcLose(outcomeMessage, computerScore);
-    
-    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-    console.log(outcomeMessage);
-    playerScore = calcWin(outcomeMessage, playerScore);
-    computerScore = calcLose(outcomeMessage, computerScore);
-
-    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-    console.log(outcomeMessage);
-    playerScore = calcWin(outcomeMessage, playerScore);
-    computerScore = calcLose(outcomeMessage, computerScore);
-
-    outcomeMessage = playRound(getPlayerChoice(), getComputerChoice());
-    console.log(outcomeMessage);
-    playerScore = calcWin(outcomeMessage, playerScore);
-    computerScore = calcLose(outcomeMessage, computerScore);
-
-    // Display final result message
-    createFinalResult(playerScore, computerScore);
-}
-
 // Increase player score on win
 function calcWin(outcomeMessage, playerScore) {
     if (outcomeMessage.includes('win')) {
@@ -119,4 +81,3 @@ function createFinalResult(playerScore, computerScore) {
     }
 }
 
-playGame();
